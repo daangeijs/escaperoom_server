@@ -1,0 +1,53 @@
+{% extends 'rooms/base.html' %}
+{% load wagtailcore_tags %}
+{% block title %}Room {{ page.title }}{% endblock %}
+
+{% block content %}
+    {% if not room_unlocked %}
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><i class="fas fa-times-circle"></i> Restricted Access!</h4>
+            <p>This area is restricted. Please enter the correct security code to proceed:</p>
+            <hr>
+            {% if page.unlock_key %}
+                <form method="post" class="form-group">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="unlock_code" class="form-label">Unlock Code</label>
+                        <input type="text" class="form-control {% if room_unlock_error %}is-invalid{% endif %}" name="unlock_code" id="unlock_code" aria-describedby="codeHelp">
+                        {% if room_unlock_error %}
+                            <div class="invalid-feedback">{{ page.first_stage_unlock_error_message }}</div>
+                        {% endif %}
+                        <div id="codeHelp" class="form-text">Enter the access code to unlock this room.</div>
+                    </div>
+                    <button type="submit" name="action" value="unlock_room" class="btn btn-warning">Submit Access Code</button>
+                </form>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="alert alert-success" role="alert">
+            {{ page.first_stage_unlock_success_message }}
+        </div>
+        {{ page.first_stage_body|richtext }}
+    {% endif %}
+
+    {% if room_unlocked and not stage_two_unlocked %}
+        {% if page.second_stage_unlock_key %}
+            <form method="post" class="form-group">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="stage_two_code" class="form-label">Second Stage Unlock Code</label>
+                    <input type="text" class="form-control {% if stage_two_unlock_error %}is-invalid{% endif %}" name="stage_two_code" id="stage_two_code">
+                    {% if stage_two_unlock_error %}
+                        <div class="invalid-feedback">{{ page.second_stage_unlock_error_message }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" name="action" value="unlock_stage_two" class="btn btn-primary mt-2">Unlock Second Stage</button>
+            </form>
+        {% endif %}
+    {% elif room_unlocked and stage_two_unlocked %}
+        <div class="alert alert-success" role="alert">
+            {{ page.second_stage_unlock_success_message }}
+        </div>
+        {{ page.second_stage_body|richtext }}
+    {% endif %}
+{% endblock %}

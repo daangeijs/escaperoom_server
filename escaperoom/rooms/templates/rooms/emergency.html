@@ -1,0 +1,17 @@
+{% extends 'rooms/base.html' %}
+{% load wagtailcore_tags %}
+
+{% block title %}Emergency Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Emergency Dashboard</h1>
+
+    <p>
+        {{ page.body|richtext }}
+    </p>
+
+    <form action="{% url 'restart' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Reset Application</button>
+    </form>
+{% endblock %}

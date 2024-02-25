@@ -1,0 +1,25 @@
+{% load wagtailcore_tags %}
+{% load menu_tags %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">  {{ page.get_site.root_page.title }} </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            {% for item in menu_items %}
+            <li class="nav-item {% if item.has_children_in_menu %}dropdown{% endif %}">
+                <a class="nav-link mr-4 {% if item.active_class %}text-radboud{% endif %}" 
+                   href="{{ item.href }}" 
+                   id="{% if item.has_children_in_menu %}navbarDropdownMenuLink{% endif %}" 
+                   {% if item.has_children_in_menu %}role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
+                    {{ item.text }} {% if item.has_children_in_menu %}<i class="fas fa-angle-down"></i>{% endif %}
+                </a>
+                {% if item.has_children_in_menu %}
+                    {% sub_menu  item %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

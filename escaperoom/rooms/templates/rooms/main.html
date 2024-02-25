@@ -1,0 +1,14 @@
+{% extends 'rooms/base.html' %}
+{% load wagtailcore_tags %}
+{% load static %}
+{% load menu_tags %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+            {{ page.body|richtext }}
+    </div>
+
+
+{% endblock %}
