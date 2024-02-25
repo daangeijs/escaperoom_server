@@ -23,6 +23,7 @@ class EmergencyPage(Page):
     ]
     
 class RoomPage(Page):
+    template = "rooms/room.html"
     first_stage_body = RichTextField(blank=True)
     second_stage_body = RichTextField(blank=True)
     unlock_key = models.CharField(max_length=255, blank=True, help_text="Key to unlock the room (leave blank if not required)")
