@@ -17,9 +17,9 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 
 # Make port 1111 available to the world outside this container
-EXPOSE 1111
+EXPOSE 8000
 
 # Run django server
-CMD ["python", "escaperoom/manage.py", "runserver", "0.0.0.0:1111"]
+CMD ["python", "escaperoom/manage.py", "runserver", "0.0.0.0:8000"]
 # let docker sleep
 # CMD ["sleep", "infinity"]
