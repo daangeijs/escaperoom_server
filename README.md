@@ -129,6 +129,23 @@ To use a different database, such as PostgreSQL or MySQL, update the `DATABASES`
 
 ---
 
+## Uninstall the Application
+
+To remove the application and the database, run the following command:
+
+1. If the server is still running first stop it.
+```sh
+make stopserver
+```
+
+2. Remove the Docker container and the created volume.
+
+```sh 
+make uninstall
+```
+
+---
+
 ## Additional Notes
 
 - **Customization:** Feel free to customize the look and feel of the escape room by extending the templates and static files.

@@ -27,6 +27,16 @@ setup: build setup_volume runserver migrations superuser
 	@echo "Setup complete!"
 	docker stop $(DOCKER_IMAGE_NAME)
 
+stopserver:
+	@echo "Stopping server..."
+	@docker stop $(DOCKER_IMAGE_NAME)
+
+uninstall:
+	@echo "Removing Docker volume..."
+	@docker volume rm $(DOCKER_VOLUME_NAME)
+	@echo "Removing Docker image..."
+	@docker rmi $(DOCKER_IMAGE_NAME)
+
 runserver: 
 	@echo "Starting server with persistent volume..."
 	docker run -p 8000:8000 -d --rm --name $(DOCKER_IMAGE_NAME) -v $(DOCKER_VOLUME_NAME):/app $(DOCKER_IMAGE_NAME)
