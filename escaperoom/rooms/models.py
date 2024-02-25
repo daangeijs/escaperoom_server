@@ -36,14 +36,14 @@ class RoomPage(Page):
     second_stage_unlock_error_message = models.TextField(default="Incorrect password for the second stage.")
 
     content_panels = Page.content_panels + [
-        FieldPanel('first_stage_body'),
         FieldPanel('unlock_key'),
         FieldPanel('first_stage_unlock_success_message'),
         FieldPanel('first_stage_unlock_error_message'),
-        FieldPanel('second_stage_body'),
+        FieldPanel('first_stage_body'),
         FieldPanel('second_stage_unlock_key'),
         FieldPanel('second_stage_unlock_success_message'),
         FieldPanel('second_stage_unlock_error_message'),
+        FieldPanel('second_stage_body'),
     ]
     
     def serve(self, request):

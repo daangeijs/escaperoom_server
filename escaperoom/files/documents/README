@@ -1,0 +1,74 @@
+# Escape Room Application
+
+This application allows you to create and manage a digital escape room experience using Wagtail CMS. Participants navigate through various rooms by solving puzzles and finding keys that unlock new rooms, providing a flexible framework for creating engaging and interactive adventures.
+
+## Getting Started
+
+### Running the Application
+
+1. **Build the Docker Image:** Ensure Docker is installed on your system. Navigate to the root directory of this project and build the Docker image using the provided Dockerfile.
+
+   ```sh
+   docker build -t escaperoom .
+   ```
+
+2. **Run the Container:** Start the application by running the Docker container.
+
+   ```sh
+   docker run -p 8000:8000 escaperoom
+   ```
+
+   The application should now be accessible at `http://localhost:8000`.
+
+## Setting Up the Escape Room
+
+### Creating a Homepage
+
+First, create a Homepage for your escape room. This will serve as the entry point for participants.
+
+1. Navigate to the Wagtail CMS admin interface.
+2. Create a new page and select "Homepage" as the page type.
+
+### Adding Rooms
+
+Add rooms as children of the Homepage. Each room can have its own puzzles, keys, and narrative.
+
+1. From the Homepage, add a child page.
+2. Select "RoomPage" as the page type and fill in the details.
+
+## Understanding the Fields
+
+### Homepage Fields
+
+- **Title:** The name of your escape room, displayed prominently on the homepage.
+- **Body:** A welcome message or introduction to the escape room experience.
+
+### RoomPage Fields
+
+- **Title:** The name of the room.
+- **First Stage Body:** The initial content or puzzle of the room.
+- **Unlock Key:** The key required to access this room. Leave blank if no key is needed.
+- **Second Stage Body:** Additional content unlocked with a second key, for a layered puzzle experience.
+- **Second Stage Unlock Key:** The key to unlock the second stage within the room.
+
+## How the Escape Room Works
+
+Participants start at the Homepage and navigate through the rooms by solving puzzles. Each room can grant them keys to unlock new rooms or reveal further content within the same room, depending on how you set up the keys and content. The structure is flexible, allowing you to create a customized experience.
+
+## Menu Configuration
+
+For a page to appear in the navigation menu, it must be marked as visible in the menu. To add pages to the menu:
+
+1. Navigate to Wagtail CMS -> Settings -> Main menu.
+2. Add the pages you wish to appear in the menu.
+
+## Submenus and Room Hierarchies
+
+Creating rooms as children of another RoomPage allows you to create submenus in the navigation. The parent room acts as a container or grouping mechanism and does not serve as a puzzle room itself. This is useful for organizing your escape room into sections or themes.
+
+## Additional Notes
+
+- **Customization:** Feel free to customize the look and feel of the escape room by extending the templates and static files.
+- **User Management:** Wagtail CMS provides robust user management features, allowing you to control access to the CMS for creating and updating rooms.
+
+Enjoy building your digital escape room experience!

@@ -132,20 +132,23 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
 MEDIA_URL = '/media/'
 
-
+# Wagtail settings
 WAGTAILMENUS_FLAT_MENUS_EDITABLE_IN_WAGTAILADMIN = False
 WAGTAIL_SITE_NAME = "Digital Escaperoom"
 WAGTAILADMIN_BASE_URL = '/admin/'
